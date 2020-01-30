@@ -1,4 +1,4 @@
-
+import re
 
 def multiples():
     count = 0
@@ -38,4 +38,50 @@ def palindrome():
             if begin == reversed_begin:
                 rock.append(n)
 
-    print(max(rock))
+
+def getCount(inputStr):
+    num_vowels = 0
+    vowels = ('a', 'e', 'i', 'o', 'u')
+    for char in inputStr:
+        for vowel in vowels:
+            if char == vowel:
+                num_vowels += 1
+
+    return num_vowels
+
+def cockroach_speed(s):
+    n = 27.7778
+    return int(s * n)
+
+def reverse_seq(n):
+    res = []
+    for i in range(1, n + 1):
+        res.append(i)
+
+    return res[::-1]
+
+# or
+
+def reverse_seq(n):
+    return list(range(n, 0, -1))
+
+def square_sum(numbers):
+    return sum([n ** 2 for n in numbers])
+
+
+def get_real_floor(n):
+    if n >= 15:
+        return n - 2
+    elif n <= 0:
+        return n
+    elif n <= 15:
+        return n - 1
+
+def is_vowel(s):
+    if len(s) > 1:
+        return False
+    elif len(re.findall(r'[aeiAEI]', s)):
+        return True
+    elif len(s) == 0: return False
+
+
