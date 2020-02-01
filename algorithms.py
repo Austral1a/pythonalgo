@@ -1,4 +1,8 @@
 import re
+import os
+from math import *
+import functools
+
 
 def multiples():
     count = 0
@@ -14,7 +18,8 @@ def fibonacci():
         if n <= 1:
             return n
         else:
-            return recur_fibo(n-1) + recur_fibo(n-2)
+            return recur_fibo(n - 1) + recur_fibo(n - 2)
+
     for i in range(70):
         print(recur_fibo(i))
 
@@ -49,9 +54,11 @@ def getCount(inputStr):
 
     return num_vowels
 
+
 def cockroach_speed(s):
     n = 27.7778
     return int(s * n)
+
 
 def reverse_seq(n):
     res = []
@@ -60,10 +67,12 @@ def reverse_seq(n):
 
     return res[::-1]
 
+
 # or
 
 def reverse_seq(n):
     return list(range(n, 0, -1))
+
 
 def square_sum(numbers):
     return sum([n ** 2 for n in numbers])
@@ -77,11 +86,103 @@ def get_real_floor(n):
     elif n <= 15:
         return n - 1
 
+
 def is_vowel(s):
     if len(s) > 1:
         return False
     elif len(re.findall(r'[aeiAEI]', s)):
         return True
-    elif len(s) == 0: return False
+    elif len(s) == 0:
+        return False
 
+
+def comp(array1, array2):
+   try:
+       return sorted([i ** 2 for i in array1]) == sorted(array2)
+   except:
+       return False
+
+
+def number_of_occurrences(element, sample):
+    res = []
+    for x in sample:
+        if x == element:
+            res.append(x)
+    return len(res)
+
+
+def compareTriplets(a, b):
+    aInt = 0
+    bInt = 0
+    for i in range(0, len(a)):
+        if a[i] > b[i]:
+            aInt += 1
+        elif a[i] < b[i]:
+            bInt += 1
+    res = [aInt, bInt]  # alice, bob
+    return res
+
+
+def aVeryBigSum(ar):
+    return sum(ar)
+
+
+def diagonalDifference(arr):
+    r = len(arr) - 1
+    d1, d2 = [], []
+    for row in range(0, len(arr) ):
+        d1.append(arr[row][row])
+        d2.append(arr[row][r])
+        r -= 1
+    return abs(sum(d1) - sum(d2))
+
+
+def plusMinus(arr):
+    plus, minus, zero = 0, 0, 0
+    for i in arr:
+        if i > 0:
+            plus += 1
+        elif i < 0:
+            minus +=1
+        else: zero +=1
+
+    pos = sum(map(lambda i: i>0, arr))*1.0/len(arr)
+    neg = sum(map(lambda i: i<0, arr))*1.0/len(arr)
+    zer = sum(map(lambda i: i==0, arr))*1.0/len(arr)
+    print(pos, neg, zer)
+    print("%f\n%f\n%f\n" % (plus/len(arr), minus/len(arr), zero/len(arr)))
+
+
+def simpleArraySum(ar):
+    return sum(ar)
+
+
+def staircase(n):
+    for i in range(1, n + 1):
+        print(' ' * (n - i) + ('#' * i))
+
+
+def miniMaxSum(arr):
+    """
+        SAS
+    """
+    min = sorted(arr)
+    max = sorted(arr)[::-1]
+    print(sum(min[:4]), sum(max[:4]))
+
+
+def ASCII(str):
+    codes = functools.reduce(lambda a,b : a+b, [ord(c) for c in str])
+    return print(codes)
+
+
+def birthdayCakeCandles(ar):
+     heighest = sorted(ar)[::-1]
+     return heighest.count(heighest[0])
+
+
+def timeConversion(s):
+    n = int(s[:2])
+    res = ( re.sub(r'^\d{0,2}', str(n+12), s))
+    return re.sub(r'PM|AM', '', res)
 
