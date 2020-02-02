@@ -2,6 +2,8 @@ import re
 import os
 from math import *
 import functools
+from collections import defaultdict
+from collections import Counter
 
 
 def multiples():
@@ -97,10 +99,10 @@ def is_vowel(s):
 
 
 def comp(array1, array2):
-   try:
-       return sorted([i ** 2 for i in array1]) == sorted(array2)
-   except:
-       return False
+    try:
+        return sorted([i ** 2 for i in array1]) == sorted(array2)
+    except:
+        return False
 
 
 def number_of_occurrences(element, sample):
@@ -130,7 +132,7 @@ def aVeryBigSum(ar):
 def diagonalDifference(arr):
     r = len(arr) - 1
     d1, d2 = [], []
-    for row in range(0, len(arr) ):
+    for row in range(0, len(arr)):
         d1.append(arr[row][row])
         d2.append(arr[row][r])
         r -= 1
@@ -143,14 +145,15 @@ def plusMinus(arr):
         if i > 0:
             plus += 1
         elif i < 0:
-            minus +=1
-        else: zero +=1
+            minus += 1
+        else:
+            zero += 1
 
-    pos = sum(map(lambda i: i>0, arr))*1.0/len(arr)
-    neg = sum(map(lambda i: i<0, arr))*1.0/len(arr)
-    zer = sum(map(lambda i: i==0, arr))*1.0/len(arr)
+    pos = sum(map(lambda i: i > 0, arr)) * 1.0 / len(arr)
+    neg = sum(map(lambda i: i < 0, arr)) * 1.0 / len(arr)
+    zer = sum(map(lambda i: i == 0, arr)) * 1.0 / len(arr)
     print(pos, neg, zer)
-    print("%f\n%f\n%f\n" % (plus/len(arr), minus/len(arr), zero/len(arr)))
+    print("%f\n%f\n%f\n" % (plus / len(arr), minus / len(arr), zero / len(arr)))
 
 
 def simpleArraySum(ar):
@@ -172,19 +175,60 @@ def miniMaxSum(arr):
 
 
 def ASCII(str):
-    codes = functools.reduce(lambda a,b : a+b, [ord(c) for c in str])
+    codes = functools.reduce(lambda a, b: a + b, [ord(c) for c in str])
     return print(codes)
 
 
 def birthdayCakeCandles(ar):
-     heighest = sorted(ar)[::-1]
-     return heighest.count(heighest[0])
+    heighest = sorted(ar)[::-1]
+    return heighest.count(heighest[0])
 
 
 
 
 def timeConversion(s):
-    n = int(s[:2])
-    res = ( re.sub(r'^\d{0,2}', str(n+12), s))
-    return re.sub(r'PM|AM', '', res)
+    h = int(s[0:2])
+    if s[-2:] == 'PM':
+        if h != 12:
+            h += 12
+    else:
+        if h == 12:
+            h = 0
+    return '%02d%s' % (h, s[2:-2])
+
+
+
+def odd_one_out(s):
+    arr = [c for c in s]
+    coincidence = []
+    for c in arr:
+        if arr.count(c) > 1:
+            coincidence.append(c)
+
+    #[coincidence.remove(c) if coincidence.count(c) % 2 != 0 else None for c in coincidence]
+
+    for c in coincidence:
+        if coincidence.count(c) % 2 != 0:
+            coincidence.remove(c)
+
+    for c in coincidence:
+        del arr[arr.index(c)]
+       # arr.pop(arr.index(c))
+    return arr
+
+
+
+def count_inversions(array):
+    sample = sorted(array)
+    counter = 0
+    def bubble_sort(arr):
+        nonlocal counter
+        for i in range(len(arr)):
+            for j in range(0, len(arr) - i - 1):
+                if arr[j] > arr[j + 1]:
+                    counter += 1
+                    arr[j], arr[j + 1] = arr[j + 1], arr[j]
+        return arr
+    bubble_sort(array)
+    return counter
 
