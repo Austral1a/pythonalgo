@@ -257,4 +257,16 @@ def two_oldest_ages(ages):
         ages.remove(max(ages))
     return res[::-1]
 
-two_oldest_ages([1, 5, 87, 45, 8, 8])
+def bouncingBall(h, bounce, window):
+    mSeen = 0
+    if h > 0 and 0 < bounce < 1 and window < h:
+        hCopy = h
+        while True:
+            hCopy *= bounce
+            mSeen += 2
+            if hCopy <= window:
+                break
+        print(mSeen - 1)
+        return mSeen - 1
+    else:
+        return -1
