@@ -232,3 +232,29 @@ def count_inversions(array):
     bubble_sort(array)
     return counter
 
+
+def countBits(n):
+    res = []
+    res = [True if b == '1' else None for b in bin(n)[2:]]
+    return res.count(True)
+    #return bin(n).count('1')
+
+
+def grabscrab(word, possible_words):
+    res = []
+    for i in possible_words:
+        print()
+    for c in possible_words:
+        my_re = r'[' + word + ']'
+        res.append(re.findall(my_re, c))
+    print(res)
+
+
+def two_oldest_ages(ages):
+    res = []
+    for i in range(0, 2):
+        res.append(max(ages))
+        ages.remove(max(ages))
+    return res[::-1]
+
+two_oldest_ages([1, 5, 87, 45, 8, 8])
